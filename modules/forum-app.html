@@ -1,1 +1,137 @@
 <link rel="import" href="dialog-question.html">
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="forum-item.html">
+<link rel="import" href="forum-header.html">
+<dom-module id="forum-app">
+
+	<template>
+		<style>
+			:host{
+				width: 100%;
+				height: 100%;
+				font-size: 16px;
+			}
+
+
+
+			.container {
+			    /* display: -webkit-flex; */
+			    display: flex;
+			    /* -webkit-flex-direction: row; */
+			    flex-direction: column;
+			    flex-wrap: wrap;
+
+
+			}
+
+			.add-forum {
+				border:1px solid blue;
+				height: 30px;
+				flex: 1;
+				align-self:auto;
+
+			}
+
+			.header-forum {
+				width: 80%;
+				border:1px solid red;
+				height: 30px;
+				align-self: auto;
+			}
+
+			.forum-list {
+				flex:1;
+				border:1px solid green;
+			}
+
+			.forum-sub-container {
+				width: 80%;
+				border:1px solid yellow;
+			}
+
+			.forum-answers {
+				flex:0 0 100%;
+				margin: 10px 0;
+				border: 3px solid black;
+			}
+
+			.forum-response {
+				flex:0 0 100%;
+				margin: 10px 0;
+				border: 3px solid purple;
+			}
+
+		</style>
+
+		<div class="container">
+
+			<div class="add-forum">
+				<span>button here</span>
+			</div>
+
+			<div class="header-forum">
+				<forum-header name="Sin foros aun"></forum-header>
+			</div>
+
+			<div class="dialog-question">
+				<dialog-question></dialog-question>
+			</div>
+
+			<div class="forum-list">
+
+				<forum-item forums="[[forums]]"></forum-item>
+			</div>
+
+			<div class="forum-sub-container">
+				<div class="forum-answers">
+					here goes answers
+				</div>
+
+				<div class="forum-response">
+					here goes response input
+				</div>
+			</div>
+		</div>
+
+	</template>
+
+
+	<script>
+		(function appShell(customElements){
+			class ForumApp extends Polymer.Element {
+
+				static get is() {
+					return 'forum-app';
+				}
+
+				static get properties() {
+					return {
+						forums: {
+							type:Array,
+							value:[
+								{name:"Forum de prueba",question:"pregunta de prueba",answers:[]},
+								{name:"Forum de prueba 2",question:"pregunta de prueba",answers:[]},
+								{name:"Forum de prueba 3",question:"pregunta de prueba",answers:[]},
+								{name:"Forum de prueba 4",question:"pregunta de prueba",answers:[]},
+								{name:"Forum de prueba 5",question:"pregunta de prueba",answers:[]},
+								{name:"Forum de prueba 6",question:"pregunta de prueba",answers:[]},
+								{name:"Forum de prueba 7",question:"pregunta de prueba",answers:[]},
+								{name:"Forum de prueba 8",question:"pregunta de prueba",answers:[]},
+								{name:"Forum de prueba 9",question:"pregunta de prueba",answers:[]},
+
+							]
+						}
+					}
+				}
+
+
+
+
+			}
+			customElements.define(ForumApp.is,ForumApp);
+		})(window.customElements);
+	</script>
+
+
+
+</dom-module>
