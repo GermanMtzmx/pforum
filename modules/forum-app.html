@@ -1,8 +1,10 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="forum-item.html">
 <link rel="import" href="forum-header.html">
+<link rel="import" href="dialog-question.html">
+
 <dom-module id="forum-app">
-	
+
 	<template>
 		<style>
 			:host{
@@ -28,7 +30,7 @@
 				height: 30px;
 				flex: 1;
 				align-self:auto;
-				
+
 			}
 
 			.header-forum {
@@ -57,7 +59,7 @@
 			.forum-response {
 				flex:0 0 100%;
 				margin: 10px 0;
-				border: 3px solid purple;				
+				border: 3px solid purple;
 			}
 
 		</style>
@@ -65,20 +67,21 @@
 		<div class="container">
 
 			<div class="add-forum">
-				<span>button here</span>
+				<dialog-question></dialog-question>
 			</div>
 
 			<div class="header-forum">
-				<forum-header name="Sin foros aun"></forum-header>
+				<forum-header id="header" name="{{name}}"></forum-header>
 			</div>
 
 			<div class="forum-list">
-				<forum-item forums="[[forums]]"></forum-item>	
+
+				<forum-item id="forumItem" index="{{index}}" forums="[[forums]]"></forum-item>
 			</div>
 
 			<div class="forum-sub-container">
 				<div class="forum-answers">
-					here goes answers	
+					here goes answers
 				</div>
 
 				<div class="forum-response">
@@ -86,17 +89,27 @@
 				</div>
 			</div>
 		</div>
-		
+
 	</template>
 
 
 	<script>
 		(function appShell(customElements){
 			class ForumApp extends Polymer.Element {
-				
+
 				static get is() {
 					return 'forum-app';
 				}
+
+
+				ready(){
+					super.ready();
+					console.log(this.$.forumItem);
+
+
+				}
+
+
 
 				static get properties() {
 					return {
@@ -114,8 +127,34 @@
 								{name:"Forum de prueba 9",question:"pregunta de prueba",answers:[]},
 
 							]
+						},
+
+						index: {
+							type:Number,
+							notify:true,
+							reflectToAttribute:true,
+							observer:'_forumItemSelected'
+						},
+
+						name: {
+							type:String,
+							notify:true,
+							value:"sin foro seleccionado",
+							observer:'_headerChanged'
+
 						}
 					}
+				}
+
+				_forumItemSelected(){
+					console.log("forum item has changed....",this.index)
+					console.log(this.$.header.name )
+					//change header on index change
+					this.name = this.forums[this.index].name
+				}
+
+				_headerChanged(){
+					console.log("header has changed");
 				}
 
 

@@ -6,21 +6,21 @@
 
 
 <dom-module id="forum-item">
-	
+
 	<template>
 
 		<style>
 			.clickable {
 				cursor: pointer;
 			}
-			
+
 		</style>
-		
+
 		<div role="listbox">
 			<template is="dom-repeat" items="[[forums]]" as="forum">
-				<paper-item class="clickable" on-tap="_choseForum" index=[[index]]>[[forum.name]]</paper-item>
+				<paper-item class="clickable" on-tap="_choseForum" index={{index}}>[[forum.name]]</paper-item>
 			</template>
-			
+
 		</div>
 
 	</template>
@@ -37,14 +37,21 @@
 				static get properties() {
 					return {
 						forums:{
-							type:Array
+							type:Array,
+							notify:true,
+						},
+
+						index:{
+							type:Number,
+							notify:true,
+							value:0,
+							reflectToAttribute:true,
 						}
 					}
 				}
 
 				_choseForum(e){
-					console.log("my position is :",e.currentTarget.index);
-					
+					this.index = e.currentTarget.index;					
 				}
 
 
