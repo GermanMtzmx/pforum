@@ -1,0 +1,53 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="/bower_components/paper-button/paper-button.html">
+<link rel="import" href="/bower_components/paper-input/paper-input.html">
+
+<dom-module id="dialog-question">
+
+  <template>
+    <paper-button raised on-tap="_openDialog">plain dialog</paper-button>
+
+    <paper-dialog id="dialog">
+      <h2>Agrega un foro</h2>
+
+      <paper-input label="Titulo">
+      </paper-input>
+      <paper-input label="Ṕregunta"></paper-input>
+
+  	  <div class="buttons">
+  	    <paper-button dialog-dismiss>Decline</paper-button>
+  	    <paper-button dialog-confirm autofocus on-tap="_saveQuestion">Accept</paper-button>
+  	  </div>
+
+  	</paper-dialog>
+
+
+  </template>
+
+  <script>
+  (function dialog() {
+    class DomElement extends Polymer.Element {
+
+      static get is() { return "dialog-question"; }
+
+      _openDialog(event){
+        this.$.dialog.open();
+      }
+
+      _saveQuestion(event){
+        this._cleanInputs();
+        console.log("ok saved");
+      }
+
+      _cleanInputs(){
+        console.log("cleaned");
+      }
+    }
+    customElements.define(DomElement.is, DomElement);
+
+  })();
+
+  </script>
+
+</dom-module>
