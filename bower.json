@@ -1,7 +1,10 @@
 {
-	"name":"Polymer forum challenge",
-	"private":true,
-	"dependencies":{
-		"Polymer/polymer":"#2.0.2"
-	}
+  "name": "Polymer forum challenge",
+  "private": true,
+  "dependencies": {
+    "Polymer/polymer": "#2.0.2",
+    "paper-item": "PolymerElements/paper-item#^2.0.0",
+    "paper-dialog": "PolymerElements/paper-dialog#^2.0.0",
+    "paper-button": "PolymerElements/paper-button#^2.0.0"
+  }
 }
