@@ -79,7 +79,7 @@
 
           _changedAnswers(){
             console.log('answers has changed')
-            if(this.forum.answers.length > 0){
+            if(this.forum.hasOwnProperty('answers') && this.forum.answers.length > 0){
               this.hasAnswers  = false;
             } else {
               this.hasAnswers = true;

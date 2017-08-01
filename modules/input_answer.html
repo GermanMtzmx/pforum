@@ -24,7 +24,7 @@
 
        <div id="container">
          <paper-input id="asnwer" value="{{asnwer}}" label="Respuesta"></paper-input>
-         <paper-button id=button raised class="custom indigo">Agregar</paper-button>
+         <paper-button id=button raised on-tap="_addQuestion" class="custom indigo">Agregar</paper-button>
        </div>
      </template>
 
@@ -33,6 +33,30 @@
        class Answer extends Polymer.Element {
 
          static get is() { return 'forum-asnwer'; }
+
+         static get properties(){
+           return{
+             answers:{
+               type:String,
+               reflectToAttribute:true,
+               notify:true,
+               observer:'_checkanswer'
+             }
+           }
+         }
+
+         _checkanswer(){
+           console.log("new asnwer");
+         }
+
+         _addQuestion(){
+           this._cleanInputs();
+         }
+
+         _cleanInputs(){
+           this.asnwer = ""
+         }
+
 
        }
 
