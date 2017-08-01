@@ -8,16 +8,34 @@
 
     <style>
       p{
-        color:blue;
+        color: #424242;
         font-size: 1rem;
+        width: 60%;
+        border: 1px solid black;
+        margin-left: 10px;
+        padding: 4px;
+        border-radius: 3px;
+        font-style: italic;
+      }
+
+      h5 {
+        color: red;
+        margin-left: 10px;
+      }
+
+      h4 {
+        margin-left: 10px;
+        color:#424242;
       }
     </style>
 
+    <h4>Pregunta: [[forum.question]]</h4>
+
     <template is="dom-if" if="[[hasAnswers]]">
-        <h4>No hay respuestas para esta pregunta</h4>
+        <h5>No hay respuestas para esta pregunta</h5>
     </template>
 
-    <template  is="dom-repeat" items="{{answers}}">
+    <template  is="dom-repeat" items="{{forum.answers}}">
       <p>[[item]]</p>
     </template>
   </template>
@@ -33,12 +51,12 @@
           static get properties(){
             
               return {
-                answers: {
-                    type:Array,
+                forum: {
+                    type:Object,
                     notify:true,
                     reflectToAttribute:true,
                     observer:'_changedAnswers',
-                    value:[]
+                    value:{}
 
                   },
                 hasAnswers:{
@@ -50,19 +68,14 @@
           }
 
           _changedAnswers(){
-            console.log('indigivussdf',this.answers.length);
-            if(this.answers.length > 0){
+            console.log('answers has changed')
+            if(this.forum.answers.length > 0){
               this.hasAnswers  = false;
             } else {
               this.hasAnswers = true;
             }
           }
 
-          addAnswer(answerText) 
-          {
-            this.push('answers', {answer:answerText});
-
-          }
       }
 
       customElements.define(ForumAnswers.is, ForumAnswers);

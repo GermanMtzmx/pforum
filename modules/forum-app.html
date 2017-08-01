@@ -40,11 +40,13 @@
 			.forum-list {
 				flex:1;
 				border:1px solid green;
+				min-height: 250px;
 			}
 
 			.forum-sub-container {
 				width: 80%;
 				border:1px solid yellow;
+				position: relative;
 			}
 
 			.forum-answers {
@@ -54,9 +56,12 @@
 			}
 
 			.forum-response {
-				flex:0 0 100%;
+				flex: 0 0 100%;
 				margin: 10px 0;
 				border: 3px solid purple;
+				position: absolute;
+				bottom: 0;
+				width: 98%;
 			}
 
 		</style>
@@ -78,7 +83,7 @@
 
 			<div class="forum-sub-container">
 				<div class="forum-answers">
-					<forum-answers answers="{{answers}}"></forum-answers>
+					<forum-answers forum="{{forum}}"></forum-answers>
 				</div>
 
 				<div class="forum-response">
@@ -113,15 +118,7 @@
 						forums: {
 							type:Array,
 							value:[
-								{name:"Forum de prueba",question:"pregunta de prueba",answers:['asdasd','asdasdasd']},
-								{name:"Forum de prueba 2",question:"pregunta de prueba",answers:[]},
-								{name:"Forum de prueba 3",question:"pregunta de prueba",answers:[]},
-								{name:"Forum de prueba 4",question:"pregunta de prueba",answers:[]},
-								{name:"Forum de prueba 5",question:"pregunta de prueba",answers:[]},
-								{name:"Forum de prueba 6",question:"pregunta de prueba",answers:[]},
-								{name:"Forum de prueba 7",question:"pregunta de prueba",answers:[]},
-								{name:"Forum de prueba 8",question:"pregunta de prueba",answers:[]},
-								{name:"Forum de prueba 9",question:"pregunta de prueba",answers:[]},
+								{name:"Forum de prueba",question:"pregunta de prueba",answers:['respuesta uno','respuesta dos']},
 
 							],
 							reflectToAttribute:true,
@@ -145,13 +142,13 @@
 
 						},
 
-						answers:{
+						forum:{
 
-							type:Array,
+							type:Object,
 							notify:true,
 							observer:'_answerChanged',
 							reflectToAttribute:true,
-							value:[]
+							value:{}
 						}						
 					}
 				}
@@ -161,7 +158,7 @@
 					console.log(this.$.header.name )
 					//change header on index change
 					this.name = this.forums[this.index].name
-					this.answers = this.forums[this.index].answers
+					this.forum = this.forums[this.index]
 				}
 
 				_headerChanged(){
@@ -174,7 +171,7 @@
 				}
 
 				_answerChanged() {
-					console.log("answers has changed papu")
+					console.log("answers has changed papu",this.forum)
 				}
 
 
