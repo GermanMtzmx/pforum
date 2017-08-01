@@ -8,11 +8,11 @@
   <template>
     <paper-button raised on-tap="_openDialog">Nuevo foro</paper-button>
 
-    <paper-dialog id="dialog">
+    <paper-dialog id="dialog" forums="{{forums}}">
       <h2>Agrega un foro</h2>
 
-      <paper-input label="Titulo">[[title]]</paper-input>
-      <paper-input label="Ṕregunta">[[question]]</paper-input>
+      <paper-input id="titleVal" value="{{title}}" label="Titulo"></paper-input>
+      <paper-input id="questionVal" value="{{question}}" label="Ṕregunta"></paper-input>
 
   	  <div class="buttons">
   	    <paper-button dialog-dismiss>Decline</paper-button>
@@ -41,23 +41,57 @@
 
           question:{
             type: String
+          },
+
+          forums:{
+            type:Array,
+            reflectToAttribute:true,
+            notify:true,
+            observer:'_forumsChanged'
+
+          },
+
+          clone:{
+            type:Array,
+            notify:true,
+            reflectToAttribute:true,
+            value:[]
           }
+
+
         };
       }
 
       _openDialog(event){
+        this.clone = []
         this.$.dialog.open();
+        for(let i of this.forums){
+          this.clone.push(i);
+        }
+
 
       }
 
       _saveQuestion(event){
+        let tmp = {
+          name:this.title,
+          question:this.question,
+          answers:[]
+        }
+        this.clone.push(tmp)
+        this.forums = this.clone;
         this._cleanInputs();
-        console.log("ok saved");
-        console.log(this.title,this.question);
+
       }
 
       _cleanInputs(){
         console.log("cleaned");
+        this.title = ""
+        this.question = ""
+      }
+
+      _forumsChanged() {
+        console.log("forum has changed")
       }
     }
     customElements.define(DomElement.is, DomElement);

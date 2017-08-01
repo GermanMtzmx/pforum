@@ -39,7 +39,7 @@
 				align-self: auto;
 				width: 80%;
 				border-bottom: 1px solid #424242;
-				
+
 	
 			}
 
@@ -70,7 +70,7 @@
 		<div class="container">
 
 			<div class="add-forum">
-				<dialog-question></dialog-question>
+				<dialog-question forums="{{forums}}"></dialog-question>
 			</div>
 
 			<div class="header-forum">
@@ -129,7 +129,9 @@
 								{name:"Forum de prueba 8",question:"pregunta de prueba",answers:[]},
 								{name:"Forum de prueba 9",question:"pregunta de prueba",answers:[]},
 
-							]
+							],
+							reflectToAttribute:true,
+							observer:'_updateForums'
 
 
 						},
@@ -160,6 +162,11 @@
 
 				_headerChanged(){
 					console.log("header has changed");
+				}
+
+
+				_updateForums() {
+					console.log("forums has changed papu")
 				}
 
 
