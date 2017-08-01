@@ -1,6 +1,7 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/polymer/lib/elements/dom-repeat.html">
 <link rel="import" href="../bower_components/polymer/lib/elements/dom-if.html">
+<link rel="import" href="/bower_components/paper-card/paper-card.html">
 
 <dom-module id="forum-answers">
 
@@ -27,12 +28,21 @@
         margin-left: 10px;
         color:#424242;
       }
+
+      #card{
+        margin-left: 30%;
+      }
     </style>
 
-    <h4>Pregunta: [[forum.question]]</h4>
 
     <template is="dom-if" if="[[hasAnswers]]">
-        <h5>No hay respuestas para esta pregunta</h5>
+
+      <paper-card id="card" heading="Pregunta: [[forum.question]]">
+        <div class="card-content">
+          <h4>No hay respuestas para esta pregunta</h4>
+        </div>
+      </paper-card>
+
     </template>
 
     <template  is="dom-repeat" items="{{forum.answers}}">
@@ -49,7 +59,7 @@
           static get is() {return "forum-answers";}
 
           static get properties(){
-            
+
               return {
                 forum: {
                     type:Object,

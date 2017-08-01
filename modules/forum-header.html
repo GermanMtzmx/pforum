@@ -1,4 +1,5 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="/bower_components/paper-toolbar/paper-toolbar.html">
 
 <dom-module id="forum-header">
 	<template>
@@ -10,9 +11,12 @@
 			}
 		</style>
 
-		<div>
-			<h3>{{name}}</h3>
-		</div>
+
+		<paper-toolbar>
+		  <paper-icon-button slot="top" icon="menu" on-tap="menuAction"></paper-icon-button>
+		  <div slot="top" class="title">{{name}}</div>
+		  <paper-icon-button slot="top" icon="more-vert" on-tap="moreAction"></paper-icon-button>
+		</paper-toolbar>
 
 	</template>
 
@@ -20,7 +24,7 @@
 	<script>
 		(function forumHeader(customElements){
 			class ForumHeader extends Polymer.Element {
-				
+
 				static get is() {
 					return `forum-header`;
 				}
