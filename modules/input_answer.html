@@ -1,0 +1,42 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/paper-button/paper-button.html">
+
+
+<dom-module id="forum-asnwer">
+     <template>
+       <style>
+       #asnwer{
+         width: 500px;
+         margin-left: 5%;
+         flex:2;
+
+       }
+       #button{
+         flex:2;
+         color: #fff;
+         background: #3F51B5;
+       }
+       #container{
+         display: flex;
+       }
+
+       </style>
+
+       <div id="container">
+         <paper-input id="asnwer" value="{{asnwer}}" label="asnwer"></paper-input>
+         <paper-button id=button raised class="custom indigo">raised</paper-button>
+       </div>
+     </template>
+
+     <script>
+
+       class Answer extends Polymer.Element {
+
+         static get is() { return 'forum-asnwer'; }
+
+       }
+
+       customElements.define(Answer.is, Answer);
+     </script>
+
+   </dom-module>

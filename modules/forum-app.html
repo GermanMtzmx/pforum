@@ -3,6 +3,7 @@
 <link rel="import" href="forum-header.html">
 <link rel="import" href="dialog-question.html">
 <link rel="import" href="forum-answers.html">
+<link rel="import" href="input_answer.html">
 
 <dom-module id="forum-app">
 
@@ -34,7 +35,7 @@
 				width: 80%;
 				border-bottom: 1px solid #424242;
 
-	
+
 			}
 
 			.forum-list {
@@ -87,7 +88,7 @@
 				</div>
 
 				<div class="forum-response">
-					here goes response input
+					<forum-asnwer></forum-asnwer>
 				</div>
 			</div>
 		</div>
@@ -149,7 +150,7 @@
 							observer:'_answerChanged',
 							reflectToAttribute:true,
 							value:{}
-						}						
+						}
 					}
 				}
 
