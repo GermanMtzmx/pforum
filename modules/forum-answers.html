@@ -1,0 +1,73 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../bower_components/polymer/lib/elements/dom-if.html">
+
+<dom-module id="forum-answers">
+
+  <template>
+
+    <style>
+      p{
+        color:blue;
+        font-size: 1rem;
+      }
+    </style>
+
+    <template is="dom-if" if="[[hasAnswers]]">
+        <h4>No hay respuestas para esta pregunta</h4>
+    </template>
+
+    <template  is="dom-repeat" items="{{answers}}">
+      <p>[[item]]</p>
+    </template>
+  </template>
+  <script>
+
+    (function forumAnswersDefinition(forumAnswers){
+      'use strict';
+
+      class ForumAnswers extends Polymer.Element{
+
+          static get is() {return "forum-answers";}
+
+          static get properties(){
+            
+              return {
+                answers: {
+                    type:Array,
+                    notify:true,
+                    reflectToAttribute:true,
+                    observer:'_changedAnswers',
+                    value:[]
+
+                  },
+                hasAnswers:{
+                  type:Boolean,
+                  value:false,
+                  reflectToAttribute:true,
+                }
+              }
+          }
+
+          _changedAnswers(){
+            console.log('indigivussdf',this.answers.length);
+            if(this.answers.length > 0){
+              this.hasAnswers  = false;
+            } else {
+              this.hasAnswers = true;
+            }
+          }
+
+          addAnswer(answerText) 
+          {
+            this.push('answers', {answer:answerText});
+
+          }
+      }
+
+      customElements.define(ForumAnswers.is, ForumAnswers);
+
+    })(window.forumAnswers);
+
+  </script>
+</dom-module>

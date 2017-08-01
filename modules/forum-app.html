@@ -2,6 +2,7 @@
 <link rel="import" href="forum-item.html">
 <link rel="import" href="forum-header.html">
 <link rel="import" href="dialog-question.html">
+<link rel="import" href="forum-answers.html">
 
 <dom-module id="forum-app">
 
@@ -13,16 +14,9 @@
 				font-size: 16px;
 			}
 
-
-
 			.container {
-			    /* display: -webkit-flex; */
 			    display: flex;
-			    /* -webkit-flex-direction: row; */
-/*			    flex-direction: column;*/
 			    flex-wrap: wrap;
-
-
 			}
 
 			.add-forum {
@@ -84,7 +78,7 @@
 
 			<div class="forum-sub-container">
 				<div class="forum-answers">
-					here goes answers
+					<forum-answers answers="{{answers}}"></forum-answers>
 				</div>
 
 				<div class="forum-response">
@@ -119,7 +113,7 @@
 						forums: {
 							type:Array,
 							value:[
-								{name:"Forum de prueba",question:"pregunta de prueba",answers:[]},
+								{name:"Forum de prueba",question:"pregunta de prueba",answers:['asdasd','asdasdasd']},
 								{name:"Forum de prueba 2",question:"pregunta de prueba",answers:[]},
 								{name:"Forum de prueba 3",question:"pregunta de prueba",answers:[]},
 								{name:"Forum de prueba 4",question:"pregunta de prueba",answers:[]},
@@ -149,7 +143,16 @@
 							value:"sin foro seleccionado",
 							observer:'_headerChanged'
 
-						}
+						},
+
+						answers:{
+
+							type:Array,
+							notify:true,
+							observer:'_answerChanged',
+							reflectToAttribute:true,
+							value:[]
+						}						
 					}
 				}
 
@@ -158,6 +161,7 @@
 					console.log(this.$.header.name )
 					//change header on index change
 					this.name = this.forums[this.index].name
+					this.answers = this.forums[this.index].answers
 				}
 
 				_headerChanged(){
@@ -167,6 +171,10 @@
 
 				_updateForums() {
 					console.log("forums has changed papu")
+				}
+
+				_answerChanged() {
+					console.log("answers has changed papu")
 				}
 
 
